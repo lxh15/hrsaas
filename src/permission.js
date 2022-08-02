@@ -1,0 +1,23 @@
+import router from '@/router'
+import store from '@/store'
+// 路由(全局)前置守卫
+// 会在所有路由进入之前触发
+// to: 去哪里的路由信息
+// from: 来自于哪个路由的信息
+// next: 是否进入
+const list = ['/login', '/404'] //设置白名单
+router.beforeEach((to, from, next) => {
+  //to and from are Route Object,next() must be called to resolve the hook
+  // 判断有没有token
+  const token = store.state.user.token
+  if (token) {
+    //   有token 在login页面就跳到根路径
+    if (to.path === '/login') return next('/')
+    next() // 不去login就放行
+  } else {
+    //   没有token
+    const isClude = list.includes(to.path)
+    if (isClude) return next() //在白名单中就放行  不需要登录的页面
+    next('/login') // 不在白名单中就去登录页
+  }
+})

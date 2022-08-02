@@ -14,7 +14,7 @@ export default {
     // 获取token
     async getToken(context, payload) {
       const res = await login(payload)
-      console.log(res)
+      // console.log(res)
       context.commit('setToken', res)
     }
   }
