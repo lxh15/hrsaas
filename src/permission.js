@@ -11,6 +11,9 @@ router.beforeEach((to, from, next) => {
   // 判断有没有token
   const token = store.state.user.token
   if (token) {
+    if (!store.state.user.userInfo.userId) {
+      store.dispatch('user/getUserInfo')  
+    }
     //   有token 在login页面就跳到根路径
     if (to.path === '/login') return next('/')
     next() // 不去login就放行

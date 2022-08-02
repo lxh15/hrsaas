@@ -12,3 +12,25 @@ export function login(data) {
     data
   })
 }
+/**
+ * 获取基本信息
+ * @returns promise
+ */
+export const getUserInfoApi = () => {
+  return request({
+    url: '/sys/profile',
+    method: 'POST'
+  })
+}
+
+/**
+ * 获取用户详细信息
+ * @param {String} id 用户的id
+ * @returns parmise
+ */
+export const getUserDetail = (id) => {
+  return request({
+    url: '/sys/user/' + id,
+    method: 'GET'
+  })
+}
