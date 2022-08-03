@@ -56,7 +56,7 @@ export default {
     return {
       // 定义数据
       loginForm: {
-        mobile: '13600000005',
+        mobile: '13800000003',
         password: '123456'
       },
       // 校验规则

@@ -15,12 +15,18 @@ import router from './router'
 import '@/icons' // icon
 import '@/permission' // permission control
 
+import * as directive from '@/directives'
+
 // mock假数据
 if (process.env.NODE_ENV === 'production') {
   const { mockXHR } = require('../mock')
   mockXHR()
 }
 
+// for循环所有的自定义指令并添加
+for (let key in directive) {
+  Vue.directive(key, directive[key])
+}
 // set ElementUI lang to EN
 Vue.use(ElementUI, { locale })
 // 如果想要中文版 element-ui，按如下方式声明
@@ -32,5 +38,5 @@ new Vue({
   el: '#app',
   router,
   store,
-  render: (h) => h(App),
+  render: (h) => h(App)
 })
