@@ -16,7 +16,7 @@ service.interceptors.request.use((config) => {
   if (store.state.user.token) {
     const currentTime = Date.now()
     const tokenTime = getTokenTime()
-    const tokenTimeout = 3 * 1000
+    const tokenTimeout = 2 * 60 * 60 * 1000
     if (currentTime - tokenTime > tokenTimeout) {
       // console.log('token过期')
       store.dispatch('user/logout')
@@ -44,6 +44,8 @@ service.interceptors.response.use(
   (error) => {
     if (error?.response?.status === 401) {
       Message.error('登陆过期')
+      store.dispatch('user/logout')
+      router.push('/login')
     } else {
       Message.error(error.message)
     }
