@@ -33,6 +33,7 @@ service.interceptors.request.use((config) => {
 service.interceptors.response.use(
   // 成功做点什么
   (res) => {
+    // console.log(res)
     const { data, success, message } = res.data
     if (success) {
       return data
