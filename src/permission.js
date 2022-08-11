@@ -6,13 +6,13 @@ import store from '@/store'
 // from: 来自于哪个路由的信息
 // next: 是否进入
 const list = ['/login', '/404'] //设置白名单
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   //to and from are Route Object,next() must be called to resolve the hook
   // 判断有没有token
   const token = store.state.user.token
   if (token) {
     if (!store.state.user.userInfo.userId) {
-      store.dispatch('user/getUserInfo')  
+      await store.dispatch('user/getUserInfo')
     }
     //   有token 在login页面就跳到根路径
     if (to.path === '/login') return next('/')
