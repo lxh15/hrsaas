@@ -9,3 +9,15 @@ export const getEmployessApi = () => {
     url: '/sys/user/simple'
   })
 }
+
+/**
+ * 获取所有角色列表
+ * @param {Object} params {page , pagesize}
+ * @returns
+ */
+export const getEmployessInfoApi = (params) => {
+  return request({
+    url: '/sys/user',
+    params
+  })
+}
