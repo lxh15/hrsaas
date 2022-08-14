@@ -34,3 +34,16 @@ export const getUserDetail = (id) => {
     method: 'GET'
   })
 }
+
+/**
+ * 更改以后保存
+ * @param {*} id
+ * @returns
+ */
+export const getUserDetailById = (data) => {
+  return request({
+    url: `/sys/user/${data.id}`,
+    method: 'PUT',
+    data
+  })
+}
