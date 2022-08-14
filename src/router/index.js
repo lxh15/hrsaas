@@ -14,6 +14,7 @@ import attendancesRouter from './modules/attendances'
 import salarysRouter from './modules/salarys'
 import settingRouter from './modules/setting'
 import socialRouter from './modules/social'
+import importsModule from './modules/importsModule'
 // 静态理由
 export const constantRoutes = [
   {
@@ -55,7 +56,8 @@ export const asyncRoutes = [
   attendancesRouter,
   salarysRouter,
   settingRouter,
-  socialRouter
+  socialRouter,
+  importsModule
 ]
 
 const createRouter = () =>

@@ -1,6 +1,6 @@
 import PageTools from './PageTools'
-
-const components = [PageTools]
+import UploadExcel from './UploadExcel'
+const components = [PageTools, UploadExcel]
 export default {
   install(Vue) {
     //  注册全局的通用栏组件对象

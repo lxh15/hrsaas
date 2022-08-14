@@ -14,10 +14,15 @@ import router from './router'
 
 import '@/icons' // icon
 import '@/permission' // permission control
+import dayjs from 'dayjs'
 
 import * as directive from '@/directives'
-
 import Component from '@/components'
+//统一引用 统一注册过滤器
+import * as filters from '@/filters'
+for (let key in filters) {
+  Vue.filter(key, filters[key])
+}
 Vue.use(Component) // 注册自己的插件
 // mock假数据
 if (process.env.NODE_ENV === 'production') {
@@ -36,6 +41,9 @@ Vue.use(ElementUI, { locale })
 
 Vue.config.productionTip = false
 
+Vue.filter('formatTime', (val) => {
+  return dayjs(val).format('YYYY-MM-DD')
+})
 new Vue({
   el: '#app',
   router,
