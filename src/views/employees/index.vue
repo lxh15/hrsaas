@@ -10,7 +10,9 @@
             @click="$router.push('/importsModule')"
             >导入</el-button
           >
-          <el-button size="small" type="danger">导出</el-button>
+          <el-button size="small" type="danger" @click="exportExcel"
+            >导出</el-button
+          >
           <el-button size="small" type="primary" @click="showAdd"
             >新增员工</el-button
           >
@@ -137,6 +139,7 @@
 <script>
 import { getEmployessInfoApi, delEmployee } from '@/api/employess'
 import employess from '@/constant/employees'
+const { exportExcelMapPath, hireType } = employess
 import AddDemployee from './component/add-employee.vue'
 export default {
   name: 'Employess',
@@ -195,6 +198,38 @@ export default {
     // 点击新增 显示弹框
     showAdd() {
       this.showAddEmployee = true
+    },
+    async exportExcel() {
+      const { export_json_to_excel } = await import('@/vendor/Export2Excel')
+      const { rows } = await getEmployessInfoApi({
+        page: 1,
+        size: this.total
+      })
+      const header = Object.keys(exportExcelMapPath)
+      // console.log(header)
+      // 双重map 映射 重新排列 返回和原数组相同的length
+      const data = rows.map((item) => {
+        // 表头的每一项 手机号  属性值 mobile 去找寻 arr里面的 mobile
+        return header.map((h) => {
+          if (h === '聘用形式') {
+            const findItem = hireType.find((hire) => {
+              return hireType.id === item[exportExcelMapPath[h]]
+            })
+            return findItem ? findItem.value : '未知'
+          } else {
+            return item[exportExcelMapPath[h]]
+          }
+        })
+      })
+      // console.log(data)
+
+      export_json_to_excel({
+        header, //表头 必填
+        data, //具体数据 必填
+        filename: '员工列表', //非必填
+        autoWidth: true, //非必填
+        bookType: 'xlsx' //非必填
+      })
     }
   }
 }
