@@ -1780,6 +1780,11 @@
     "@webassemblyjs/wast-parser" "1.9.0"
     "@xtuc/long" "4.2.2"
 
+"@xmldom/xmldom@^0.8.2":
+  version "0.8.2"
+  resolved "https://registry.npmmirror.com/@xmldom/xmldom/-/xmldom-0.8.2.tgz"
+  integrity sha512-+R0juSseERyoPvnBQ/cZih6bpF7IpCXlWbHRoCRzYzqpz6gWHOgf8o4MOEf6KBVuOyqU+gCNLkCWVIJAro8XyQ==
+
 "@xtuc/ieee754@^1.2.0":
   version "1.2.0"
   resolved "https://registry.npmmirror.com/@xtuc/ieee754/-/ieee754-1.2.0.tgz"
@@ -2880,9 +2885,9 @@ caniuse-api@^3.0.0:
     lodash.uniq "^4.5.0"
 
 caniuse-lite@^1.0.0, caniuse-lite@^1.0.30000957, caniuse-lite@^1.0.30001109, caniuse-lite@^1.0.30001370:
-  version "1.0.30001375"
-  resolved "https://registry.npmmirror.com/caniuse-lite/-/caniuse-lite-1.0.30001375.tgz#8e73bc3d1a4c800beb39f3163bf0190d7e5d7672"
-  integrity sha512-kWIMkNzLYxSvnjy0hL8w1NOaWNr2rn39RTAVyIwcw8juu60bZDWiF1/loOYANzjtJmy6qPgNmn38ro5Pygagdw==
+  version "1.0.30001376"
+  resolved "https://registry.npmmirror.com/caniuse-lite/-/caniuse-lite-1.0.30001376.tgz#af2450833e5a06873fbb030a9556ca9461a2736d"
+  integrity sha512-I27WhtOQ3X3v3it9gNs/oTpoE5KpwmqKR5oKPA8M0G7uMXh9Ty81Q904HpKUrM30ei7zfcL5jE7AXefgbOfMig==
 
 capture-exit@^2.0.0:
   version "2.0.0"
@@ -3421,6 +3426,13 @@ core-util-is@~1.0.0:
   version "1.0.3"
   resolved "https://registry.npmmirror.com/core-util-is/-/core-util-is-1.0.3.tgz"
   integrity sha512-ZQBvi1DcpJ4GDqanjucZ2Hj3wEO5pZDS89BWbkcrvdxksJorwUDDZamX9ldFkp9aw2lmBDLgkObEA4DWNJ9FYQ==
+
+cos-js-sdk-v5@^1.3.10:
+  version "1.3.10"
+  resolved "https://registry.npmmirror.com/cos-js-sdk-v5/-/cos-js-sdk-v5-1.3.10.tgz#d3bb20c5f3f970c61a984a5a21ca44ae1d283681"
+  integrity sha512-3Dx5vcSSEy1Gkei7x1j63lhBhFmyjEmafhqeuYMA6GvZ5Wnv2pw4Kyphkn52QRMsjS4TBQQXUEuuT79o4qq4KQ==
+  dependencies:
+    "@xmldom/xmldom" "^0.8.2"
 
 cosmiconfig@^5.0.0:
   version "5.2.1"
@@ -4750,7 +4762,7 @@ file-loader@^4.2.0:
 
 file-saver@^2.0.5:
   version "2.0.5"
-  resolved "https://registry.npmmirror.com/file-saver/-/file-saver-2.0.5.tgz#d61cfe2ce059f414d899e9dd6d4107ee25670c38"
+  resolved "https://registry.npmmirror.com/file-saver/-/file-saver-2.0.5.tgz"
   integrity sha512-P9bmyZ3h/PRG+Nzga+rbdI4OEpNDzAVyy74uVO9ATgzLK6VtAsYybF/+TOCvrc0MO793d6+42lLyZTw7/ArVzA==
 
 file-uri-to-path@1.0.0:
@@ -8911,7 +8923,7 @@ raw-body@2.5.1:
 
 raw-loader@~0.5.1:
   version "0.5.1"
-  resolved "https://registry.npmmirror.com/raw-loader/-/raw-loader-0.5.1.tgz#0c3d0beaed8a01c966d9787bf778281252a979aa"
+  resolved "https://registry.npmmirror.com/raw-loader/-/raw-loader-0.5.1.tgz"
   integrity sha512-sf7oGoLuaYAScB4VGr0tzetsYlS8EJH6qnTCfQ/WVEa89hALQ4RQfCKt5xCyPQKPDUbVUAIP1QsxAwfAjlDp7Q==
 
 react-is@^16.8.4:
@@ -9417,7 +9429,7 @@ script-ext-html-webpack-plugin@2.1.3:
 
 script-loader@^0.7.2:
   version "0.7.2"
-  resolved "https://registry.npmmirror.com/script-loader/-/script-loader-0.7.2.tgz#2016db6f86f25f5cf56da38915d83378bb166ba7"
+  resolved "https://registry.npmmirror.com/script-loader/-/script-loader-0.7.2.tgz"
   integrity sha512-UMNLEvgOAQuzK8ji8qIscM3GIrRCWN6MmMXGD4SD5l6cSycgGsCo0tX5xRnfQcoghqct0tjHjcykgI1PyBE2aA==
   dependencies:
     raw-loader "~0.5.1"
