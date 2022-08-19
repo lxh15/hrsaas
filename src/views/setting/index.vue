@@ -31,7 +31,9 @@
             </el-table-column>
             <el-table-column align="center" label="操作">
               <template>
-                <el-button size="small" type="success">分配权限</el-button>
+                <el-button size="small" type="success" @click="showRoleDialog"
+                  >分配权限</el-button
+                >
                 <el-button size="small" type="primary">编辑</el-button>
                 <el-button size="small" type="danger">删除</el-button>
               </template>
@@ -111,6 +113,23 @@
         <el-button type="primary" @click="onAddRole">确 定</el-button>
       </span>
     </el-dialog>
+    <!-- 分配权限的弹层 -->
+    <el-dialog title="分配权限" :visible.sync="setRoleDialog" width="50%">
+      <!--:default-checked-keys="defaultCheckedKeys 默认勾选的节点的 key 的数组"
+        node-key  节点用来作为唯一标识的属性 配合上面的来用-->
+      <el-tree
+        :default-checked-keys="defaultCheckedKeys"
+        node-key="id"
+        default-expand-all
+        show-checkbox
+        :data="permissions"
+        :props="{ label: 'name' }"
+      ></el-tree>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="setRoleDialog = false">取 消</el-button>
+        <el-button type="primary">确 定</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -118,7 +137,10 @@
 import { getRolesApi, addRoleApi, getCompanyInfo } from '@/api/role'
 import { createNamespacedHelpers } from 'vuex'
 const { mapState } = createNamespacedHelpers('user')
+import { getPermissionList } from '@/api/permisson'
+import { transListToTree } from '@/utils/index'
 export default {
+  name: 'setting',
   data() {
     return {
       activeName: 'first',
@@ -134,13 +156,17 @@ export default {
       romRules: {
         name: [{ required: true, message: '名称不能为空', trigger: 'blur' }]
       },
-      formDate: {}
+      formDate: {},
+      setRoleDialog: false,
+      permissions: [],
+      defaultCheckedKeys: ['1']
     }
   },
 
   created() {
     this.getRoles()
     this.getCompanyInfo()
+    this.getPermissions()
   },
 
   methods: {
@@ -195,6 +221,16 @@ export default {
       // console.log(companyId)
       this.formDate = await getCompanyInfo(companyId)
       console.log(this.formDate)
+    },
+    //
+    showRoleDialog() {
+      this.setRoleDialog = true
+    },
+    async getPermissions() {
+      const res = await getPermissionList()
+      console.log(res)
+      const treePermissions = transListToTree(res, '0')
+      this.permissions = treePermissions
     }
   }
 }
