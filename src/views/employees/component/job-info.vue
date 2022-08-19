@@ -2,7 +2,7 @@
   <div>
     <i
       class="el-icon-printer"
-      @click="$router.push('/employees/print?/' + userId + '?type=job')"
+      @click="$router.push('/employees/print/' + userId + '?type=job')"
     ></i>
   </div>
 </template>
