@@ -1,5 +1,10 @@
 <template>
   <div class="user-info">
+    <i
+      class="el-icon-printer"
+      @click="$router.push(`/employees/print/${userId}?type=personal`)"
+    ></i>
+
     <!-- 个人信息 -->
     <el-form label-width="220px">
       <!-- 工号 入职时间 -->
@@ -396,6 +401,7 @@
 import EmployeeEnum from '@/constant/employees'
 import { getUserDetail, getUserDetailById } from '@/api/user'
 import { getPersonalDetail, updatePersonal } from '@/api/employess'
+import jobInfo from '../component/job-info.vue'
 export default {
   data() {
     return {
@@ -466,6 +472,9 @@ export default {
         remarks: '' // 备注
       }
     }
+  },
+  components: {
+    jobInfo
   },
   created() {
     this.loadUserDetail()

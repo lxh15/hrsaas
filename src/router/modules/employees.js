@@ -12,6 +12,11 @@ export default {
       path: 'detail/:id', // query传参 动态路由传参
       component: () => import('@/views/employees/detail'),
       hidden: true // 不在左侧菜单显示
+    },
+    {
+      path: 'print/:id',
+      component: () => import('@/views/employees/print.vue'),
+      hidden: true // 不在左侧菜单显示
     }
   ]
 }
