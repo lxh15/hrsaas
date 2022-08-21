@@ -3,6 +3,8 @@ export default {
   path: '/importsModule',
   component: Layout,
   // hidden: true,
+  meta: { id: 'importsModule' }, // 用来和后端返回的权限匹配动态的路由
+
   children: [
     {
       path: '',

@@ -2,6 +2,7 @@ import Layout from '@/layout'
 export default {
   path: '/employees',
   component: Layout,
+  meta: { id: 'employees' }, // 用来和后端返回的权限匹配动态的路由
   children: [
     {
       path: '',

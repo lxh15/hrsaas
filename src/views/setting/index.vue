@@ -30,8 +30,11 @@
             <el-table-column prop="description" align="center" label="描述">
             </el-table-column>
             <el-table-column align="center" label="操作">
-              <template>
-                <el-button size="small" type="success" @click="showRoleDialog"
+              <template slot-scope="{ row }">
+                <el-button
+                  size="small"
+                  type="success"
+                  @click="showRoleDialog(row.id)"
                   >分配权限</el-button
                 >
                 <el-button size="small" type="primary">编辑</el-button>
@@ -114,10 +117,18 @@
       </span>
     </el-dialog>
     <!-- 分配权限的弹层 -->
-    <el-dialog title="分配权限" :visible.sync="setRoleDialog" width="50%">
+    <!-- 关闭时销毁 Dialog 中的元素 destroy-on-close  和 @close 有妙用 -->
+    <el-dialog
+      title="分配权限"
+      destroy-on-close
+      @close="onClose"
+      :visible.sync="setRoleDialog"
+      width="50%"
+    >
       <!--:default-checked-keys="defaultCheckedKeys 默认勾选的节点的 key 的数组"
         node-key  节点用来作为唯一标识的属性 配合上面的来用-->
       <el-tree
+        ref="preTree"
         :default-checked-keys="defaultCheckedKeys"
         node-key="id"
         default-expand-all
@@ -127,7 +138,7 @@
       ></el-tree>
       <span slot="footer" class="dialog-footer">
         <el-button @click="setRoleDialog = false">取 消</el-button>
-        <el-button type="primary">确 定</el-button>
+        <el-button type="primary" @click="onSaveRights">确 定</el-button>
       </span>
     </el-dialog>
   </div>
@@ -139,6 +150,7 @@ import { createNamespacedHelpers } from 'vuex'
 const { mapState } = createNamespacedHelpers('user')
 import { getPermissionList } from '@/api/permisson'
 import { transListToTree } from '@/utils/index'
+import { getRoleInfo, assignPerm } from '@/api/role'
 export default {
   name: 'setting',
   data() {
@@ -146,7 +158,7 @@ export default {
       activeName: 'first',
       tableData: [],
       total: 0,
-      pagesize: 2,
+      pagesize: 5,
       page: 1,
       addDialogVisible: false,
       addForm: {
@@ -159,7 +171,8 @@ export default {
       formDate: {},
       setRoleDialog: false,
       permissions: [],
-      defaultCheckedKeys: ['1']
+      defaultCheckedKeys: [],
+      roleId: ''
     }
   },
 
@@ -176,31 +189,31 @@ export default {
         page: this.page,
         pagesize: this.pagesize
       })
-      console.log(rows)
+      // console.log(rows)
       this.tableData = rows
       this.total = total
     },
     //
     sizeChange(val) {
-      console.log(`每页 ${val} 条`)
+      // console.log(`每页 ${val} 条`)
       this.pagesize = val
       this.getRoles()
     },
     currentChange(val) {
-      console.log(`当前页: ${val}`)
+      // console.log(`当前页: ${val}`)
       this.page = val
       this.getRoles()
     },
-    // 点击取消
+    // // 点击取消
     onClose() {
       this.addDialogVisible = false
     },
     // 添加人员
     async onAddRole() {
-      console.log(this.addForm)
+      // console.log(this.addForm)
       await this.$refs.form.validate()
       const res = await addRoleApi(this.addForm)
-      console.log(res)
+      // console.log(res)
       this.$message.success('添加成功')
       this.dialogClose()
       // this.addDialogVisible = false
@@ -220,15 +233,36 @@ export default {
       const companyId = this.$store.state.user.userInfo.companyId
       // console.log(companyId)
       this.formDate = await getCompanyInfo(companyId)
-      console.log(this.formDate)
+      // console.log(this.formDate)
     },
-    //
-    showRoleDialog() {
+    // 分配权限
+    async showRoleDialog(id) {
+      this.roleId = id
       this.setRoleDialog = true
+      const res = await getRoleInfo(id)
+      // console.log(res.permIds)
+      this.defaultCheckedKeys = res.permIds
     },
+    // 点击对话框确定
+    async onSaveRights() {
+      // this.$refs.preTree.getCheckedKeys()
+      await assignPerm({
+        id: this.roleId,
+        permIds: this.$refs.preTree.getCheckedKeys()
+      })
+      this.$message.success('分配成功')
+      this.addDialogVisible = false
+      this.onClose()
+    },
+    // 点击取消
+    onClose() {
+      this.setRoleDialog = false
+      this.defaultCheckedKeys = []
+    },
+    // 数组转树形
     async getPermissions() {
       const res = await getPermissionList()
-      console.log(res)
+      // console.log(res)
       const treePermissions = transListToTree(res, '0')
       this.permissions = treePermissions
     }

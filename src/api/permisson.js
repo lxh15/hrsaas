@@ -6,3 +6,15 @@ export function getPermissionList(params) {
     params
   })
 }
+
+/**
+ * @param {Object} data
+ * @returns promise
+ */
+export function addPermission(data) {
+  return request({
+    url: '/sys/permission',
+    method: 'POST',
+    data
+  })
+}

@@ -1,4 +1,4 @@
-import router from '@/router'
+import router, { asyncRoutes } from '@/router'
 import store from '@/store'
 // 路由(全局)前置守卫
 // 会在所有路由进入之前触发
@@ -12,7 +12,10 @@ router.beforeEach(async (to, from, next) => {
   const token = store.state.user.token
   if (token) {
     if (!store.state.user.userInfo.userId) {
-      await store.dispatch('user/getUserInfo')
+      // 获取用户信息  store.dispatch得返回值是promise
+      const { roles } = await store.dispatch('user/getUserInfo')
+      await store.dispatch('permission/fliterRoutes', roles)
+      next(to.path)
     }
     //   有token 在login页面就跳到根路径
     if (to.path === '/login') return next('/')
