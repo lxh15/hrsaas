@@ -14,7 +14,10 @@ router.beforeEach(async (to, from, next) => {
     if (!store.state.user.userInfo.userId) {
       // 获取用户信息  store.dispatch得返回值是promise
       const { roles } = await store.dispatch('user/getUserInfo')
+      console.log(roles.points)
       await store.dispatch('permission/fliterRoutes', roles)
+      // 传递按钮权限
+      // await store.dispatch('permission/setPointsAction', roles.points)
       next(to.path)
     }
     //   有token 在login页面就跳到根路径

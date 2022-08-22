@@ -9,6 +9,7 @@
             size="small"
             type="primary"
             @click="addDialogVisible = true"
+            v-if="isHas(point.roles.add)"
             >新增角色</el-button
           >
           <!-- 表格 -->
@@ -37,8 +38,18 @@
                   @click="showRoleDialog(row.id)"
                   >分配权限</el-button
                 >
-                <el-button size="small" type="primary">编辑</el-button>
-                <el-button size="small" type="danger">删除</el-button>
+                <el-button
+                  size="small"
+                  type="primary"
+                  v-isHas="point.roles.edit"
+                  >编辑</el-button
+                >
+                <el-button
+                  size="small"
+                  type="danger"
+                  v-if="isHas(point.roles.del)"
+                  >删除</el-button
+                >
               </template>
             </el-table-column>
           </el-table>
@@ -151,8 +162,10 @@ const { mapState } = createNamespacedHelpers('user')
 import { getPermissionList } from '@/api/permisson'
 import { transListToTree } from '@/utils/index'
 import { getRoleInfo, assignPerm } from '@/api/role'
+import MixinsPermission from '@/mixins/permission'
 export default {
   name: 'setting',
+  mixins: [MixinsPermission],
   data() {
     return {
       activeName: 'first',
@@ -266,6 +279,10 @@ export default {
       const treePermissions = transListToTree(res, '0')
       this.permissions = treePermissions
     }
+    // isHas(point) {
+    //   // 看看按钮的标识  在没在按钮权限组里面
+    //   return this.$store.state.permission.points.includes(point)
+    // }
   }
 }
 </script>

@@ -13,7 +13,11 @@
           <el-button size="small" type="danger" @click="exportExcel"
             >导出</el-button
           >
-          <el-button size="small" type="primary" @click="showAdd"
+          <el-button
+            size="small"
+            type="primary"
+            @click="showAdd"
+            v-if="isHas(point.employees.add)"
             >新增员工</el-button
           >
         </template>
@@ -114,6 +118,7 @@
                 type="text"
                 size="small"
                 @click="deleteEmployee(row.id)"
+                v-if="isHas(point.employees.del)"
                 >删除</el-button
               >
             </template>
@@ -157,8 +162,10 @@ const { exportExcelMapPath, hireType } = employess
 import AddDemployee from './component/add-employee.vue'
 import AssignRole from './component/assign-role.vue'
 import QRCode from 'qrcode'
+import MixinsPermission from '@/mixins/permission'
 export default {
   name: 'Employess',
+  mixins: [MixinsPermission],
   data() {
     return {
       employess: [],
