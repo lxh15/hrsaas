@@ -8,6 +8,7 @@ export default {
   children: [
     {
       path: '',
+      name: 'importsModule',
       component: () => import('@/views/importsModule'),
       meta: { title: '导入', icon: 'tree-table' }
     }

@@ -5,7 +5,7 @@
         <img src="@/assets/common/img.jpeg" alt="">
         <div class="info">
           <p class="name"><strong> {{ user.username }} </strong><span :class="dutyStatus">{{ dutyStatusTxt }}</span></p>
-          <p class="time">入职时间:  {{ user.timeOfEntry | formatDate }}   最新工资： {{ formLabelAlign.currentPostWage + formLabelAlign.currentBasicSalary }} <ul><span class="more">?</span><li>员工所有调薪后的基本工资、岗位工资合计</li></ul></p>
+          <p class="time">入职时间:  {{ user.timeOfEntry | formatTime }}   最新工资： {{ formLabelAlign.currentPostWage + formLabelAlign.currentBasicSalary }} <ul><span class="more">?</span><li>员工所有调薪后的基本工资、岗位工资合计</li></ul></p>
           <p>当月基本工资 / 当月岗位工资: {{ formLabelAlign.currentBasicSalary }} / {{ formLabelAlign.currentPostWage }}</p>
         </div>
       </div>

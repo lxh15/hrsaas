@@ -21,6 +21,7 @@ import Component from '@/components'
 //统一引用 统一注册过滤器
 import * as filters from '@/filters'
 import Print from 'vue-print-nb'
+import i18n from '@/i18n'
 Vue.use(Print)
 
 for (let key in filters) {
@@ -38,7 +39,10 @@ for (let key in directive) {
   Vue.directive(key, directive[key])
 }
 // set ElementUI lang to EN
-Vue.use(ElementUI, { locale })
+Vue.use(ElementUI, {
+  i18n: (key, value) => i18n.t(key, value)
+})
+
 // 如果想要中文版 element-ui，按如下方式声明
 // Vue.use(ElementUI)
 
@@ -51,5 +55,6 @@ new Vue({
   el: '#app',
   router,
   store,
+  i18n,
   render: (h) => h(App)
 })

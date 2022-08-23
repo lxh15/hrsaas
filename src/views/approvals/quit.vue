@@ -3,7 +3,7 @@
     <div class="contLeft">
       <h2>{{ information.user_name }}申请离职</h2>
       <div class="topTit">
-        <img src="@/assets/common/img.jpeg" alt>
+        <img src="@/assets/common/img.jpeg" alt />
         <div class="info">
           <p class="name">
             <strong>{{ information.username }}</strong>
@@ -12,18 +12,16 @@
             <span>部门：{{ information.departmentName }}</span>
           </p>
           <p>
-            <span>入职时间： {{ information.timeOfEntry | formatDate }}</span>
+            <span>入职时间： {{ information.timeOfEntry | formatTime }}</span>
           </p>
         </div>
       </div>
       <div class="content">
         <!-- <p v-for="(item, index) in information.body" :key="index"><span>{{item.key}} </span> {{item.val}}</p> -->
-        <p>
-          <span>申请类型：</span>离职
-        </p>
+        <p><span>申请类型：</span>离职</p>
         <p>
           <span>期望离职时间：</span>
-          {{ information.data.exceptTime | formatDate }}
+          {{ information.data.exceptTime | formatTime }}
         </p>
         <p>
           <span>离职原因：</span>
@@ -38,7 +36,7 @@
       <div class="Items">
         <li v-for="(item, index) in taskInstanceOutList" :key="index">
           <div class="name">
-            <p>{{ item.handleTime | formatDate }}</p>
+            <p>{{ item.handleTime | formatTime }}</p>
             <!-- <p>{{item.description}}</p> -->
           </div>
           <div class="act">
@@ -57,7 +55,11 @@
 </template>
 
 <script>
-import { getApprovalsDetail, getApprovalsTaskDetail, downImg } from '@/api/approvals'
+import {
+  getApprovalsDetail,
+  getApprovalsTaskDetail,
+  downImg
+} from '@/api/approvals'
 export default {
   name: 'UsersTableIndex',
 
@@ -86,11 +88,15 @@ export default {
     // 图片下载
     async getReviewHistory(id) {
       const response = await downImg(id)
-      this.imgs = 'data:image/png;base64,' + btoa(
-        new Uint8Array(response.request.response).reduce((data, byte) => data + String.fromCharCode(byte), '')
-      )
+      this.imgs =
+        'data:image/png;base64,' +
+        btoa(
+          new Uint8Array(response.request.response).reduce(
+            (data, byte) => data + String.fromCharCode(byte),
+            ''
+          )
+        )
     }
   }
 }
 </script>
-

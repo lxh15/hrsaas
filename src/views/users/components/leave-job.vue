@@ -2,7 +2,7 @@
   <div class="AdjustThePost">
     <div class="infoBox">
       <div class="logo">
-        <img src="@/assets/common/img.jpeg" alt>
+        <img src="@/assets/common/img.jpeg" alt />
       </div>
       <div class="info">
         <p>
@@ -14,15 +14,23 @@
         </p>
         <p>
           <span>入职时间：</span>
-          {{ ruleForm.timeOfEntry | formatDate }}
+          {{ ruleForm.timeOfEntry | formatTime }}
         </p>
       </div>
     </div>
     <div>
-      <el-form ref="ruleForm" :model="ruleForm" label-width="100px" class="demo-ruleForm">
-
+      <el-form
+        ref="ruleForm"
+        :model="ruleForm"
+        label-width="100px"
+        class="demo-ruleForm"
+      >
         <el-form-item label="请假类型：" prop="holidayType">
-          <el-input v-model="ruleForm.data.holidayType" style="width: 220px;" :disabled="true" />
+          <el-input
+            v-model="ruleForm.data.holidayType"
+            style="width: 220px"
+            :disabled="true"
+          />
         </el-form-item>
 
         <el-form-item label="开始时间：" prop="startTime">
@@ -42,39 +50,56 @@
           />
         </el-form-item>
         <el-form-item label="请假时长：" prop="duration">
-          <el-input v-model="ruleForm.data.duration" style="width: 220px;" :disabled="true" />
+          <el-input
+            v-model="ruleForm.data.duration"
+            style="width: 220px"
+            :disabled="true"
+          />
         </el-form-item>
         <el-form-item label="申请原因：" prop="cause">
           <el-input
             v-model="ruleForm.data.reason"
             type="textarea"
-            style="width: 400px;"
+            style="width: 400px"
             placeholder="显示请假人填写的请假原因"
             :disabled="computeOpType"
           />
         </el-form-item>
-        <div class="buttones" style="text-align: center;margin-top: 40px">
+        <div class="buttones" style="text-align: center; margin-top: 40px">
           <el-form-item>
             <el-button
-              v-show="(ruleForm.state == 0 || ruleForm.state == 1) && tabLab =='launch'"
+              v-show="
+                (ruleForm.state == 0 || ruleForm.state == 1) &&
+                tabLab == 'launch'
+              "
               type="primary"
               @click="btnClick"
-            >撤销</el-button>
+              >撤销</el-button
+            >
             <el-button
-              v-show="(ruleForm.state == 0 || ruleForm.state == 1) && tabLab =='approvals'"
+              v-show="
+                (ruleForm.state == 0 || ruleForm.state == 1) &&
+                tabLab == 'approvals'
+              "
               type="primary"
               @click="btnPass"
-            >通过</el-button>
+              >通过</el-button
+            >
             <el-button
-              v-show="(ruleForm.state == 0 || ruleForm.state == 1) && tabLab =='approvals'"
+              v-show="
+                (ruleForm.state == 0 || ruleForm.state == 1) &&
+                tabLab == 'approvals'
+              "
               type="primary"
               @click="btnReject"
-            >驳回</el-button>
+              >驳回</el-button
+            >
             <el-button
-              v-show="ruleForm.state == 4 && tabLab =='launch'"
+              v-show="ruleForm.state == 4 && tabLab == 'launch'"
               type="primary"
               @click="btnSave"
-            >提交</el-button>
+              >提交</el-button
+            >
           </el-form-item>
         </div>
       </el-form>
@@ -100,7 +125,6 @@ export default {
     tabLab: {
       type: String,
       default: ''
-
     }
   },
 
@@ -169,7 +193,7 @@ export default {
 </script>
 
 <style rel="stylesheet/scss" lang="scss" scoped>
-@import "../../../styles/variables";
+@import '../../../styles/variables';
 .AdjustThePost {
   .infoBox {
     display: flex;
